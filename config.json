@@ -1,0 +1,10 @@
+{
+    "jwtSecret": "changeme",
+    "users": [
+        {
+            "username": "example",
+            "password": "changeme"
+        }
+    ],
+    "unixSocket": "/var/run/docker.sock"
+}
