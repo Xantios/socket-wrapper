@@ -3,6 +3,7 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import ExpressJwt from 'express-jwt';
 import request from 'request';
+import ipRangeCheck from 'ip-range-check';
 
 import errorHandler from './error-handler';
 import auth from './auth';
@@ -20,7 +21,12 @@ let expressJwt = ExpressJwt({secret: jwtSecret}).unless({
     // Exclude login route.
     path: [
         '/users/authenticate'
-    ]    
+    ],
+    custom: (req) => {
+        // feel free to add req.headers['x-forwarded-for'] however, the x-forwarded-for can easely be spoofed.
+        let ip = req.connection.remoteAddress;
+        return ipRangeCheck(ip,config['whitelist']);
+    }
 
 });
 
