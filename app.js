@@ -23,8 +23,13 @@ let expressJwt = ExpressJwt({secret: jwtSecret}).unless({
         '/users/authenticate'
     ],
     custom: (req) => {
+
         // feel free to add req.headers['x-forwarded-for'] however, the x-forwarded-for can easely be spoofed.
         let ip = req.connection.remoteAddress;
+
+        // Hybrid IPv4/6 addresses can be embedded.
+        ip = (ip.substr(0,7)=="::ffff:") ? ip.replace('::ffff:','') : ip;
+
         return ipRangeCheck(ip,config['whitelist']);
     }
 
