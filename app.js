@@ -16,7 +16,10 @@ global.config = require('./config.json');
 
 // Setup express jwt
 const jwtSecret = config.jwtSecret;
-let expressJwt = ExpressJwt({secret: jwtSecret}).unless({
+let expressJwt = ExpressJwt({
+    secret: jwtSecret,
+    algorithms: ['RS256']
+}).unless({
 
     // Exclude login route.
     path: [
