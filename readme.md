@@ -1,6 +1,6 @@
 ## Socket wrapper
 
-Just a simple unix socket wrapper using JWT
+Just a simple unix socket wrapper using JWT, please DO NOT expose things to the internet !!
 
 ## Config
 the config file is a simple json file, just replace some values and you should be good to go
