@@ -25,6 +25,7 @@ let expressJwt = ExpressJwt({
     path: [
         '/users/authenticate'
     ],
+    // Or if you have a valid (whitelisted) IP
     custom: (req) => {
 
         // feel free to add req.headers['x-forwarded-for'] however, the x-forwarded-for can easely be spoofed.
@@ -74,7 +75,6 @@ app.use((req,res,next) => {
             return next(err);
         }
 
-        // We can defice Json without any trouble :)
         if(resp.headers["content-type"] == "application/json") {
             resp.body = JSON.parse(resp.body);
         }
